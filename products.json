@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "title": "Mouse Gamer",
+    "description": "Mouse óptico con luces RGB",
+    "code": "MOUSE123",
+    "price": 50.99,
+    "status": true,
+    "stock": 30,
+    "category": "Periféricos",
+    "thumbnails": [
+      "img1.jpg",
+      "img2.jpg"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Teclado",
+    "description": "Teclado Mecánico",
+    "code": "TEC456",
+    "price": 72.5,
+    "status": true,
+    "stock": 60,
+    "category": "Periféricos",
+    "thumbnails": [
+      "img3.jpg"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Monitor",
+    "description": "Monitor Gamer 144Hz",
+    "code": "MON789",
+    "price": 160,
+    "status": true,
+    "stock": 6,
+    "category": "Periféricos",
+    "thumbnails": [
+      "img4.jpg"
+    ]
+  }
+]
