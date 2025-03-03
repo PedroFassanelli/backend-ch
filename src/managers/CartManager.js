@@ -1,8 +1,9 @@
 const fs = require("fs").promises;
+const path = require("path");
 
 class CartManager {
     constructor(filePath) {
-        this.filePath = filePath;
+        this.filePath = path.resolve(filePath);
     }
 
     async getAllCarts() {
