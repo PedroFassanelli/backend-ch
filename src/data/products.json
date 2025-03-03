@@ -38,5 +38,23 @@
     "thumbnails": [
       "img4.jpg"
     ]
+  },
+  {
+    "id": 4,
+    "title": "Pad",
+    "price": 15
+  },
+  {
+    "id": 5,
+    "title": "Auriculares",
+    "description": "Auriculares games",
+    "code": "AUR555",
+    "price": 200,
+    "status": true,
+    "stock": 7,
+    "category": "Perifericos",
+    "thumbnails": [
+      "img42.jpg"
+    ]
   }
 ]

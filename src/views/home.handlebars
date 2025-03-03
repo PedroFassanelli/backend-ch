@@ -1,0 +1,8 @@
+{{#> layout title="Lista de Productos"}}
+    <h1>Lista de Productos</h1>
+    <ul>
+        {{#each products}}
+            <li>{{this.id}} - {{this.title}} - ${{this.price}}</li>
+        {{/each}}
+    </ul>
+{{/layout}}
