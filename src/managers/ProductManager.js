@@ -11,40 +11,60 @@ class ProductManager {
             const data = await fs.readFile(this.filePath, 'utf-8');
             return JSON.parse(data);
         } catch (error) {
+            console.error("❌ Error leyendo productos:", error);
             return [];
         }
     }
 
     async getProductById(id) {
-        const products = await this.getAllProducts();
-        return products.find(prod => prod.id === parseInt(id));
+        try {
+            const products = await this.getAllProducts();
+            return products.find(p => p.id === parseInt(id));
+        } catch (error) {
+            console.error("❌ Error obteniendo producto:", error);
+            throw error;
+        }
     }
 
     async addProduct(product) {
-        const products = await this.getAllProducts();
-        const lastId = products.length > 0 ? parseInt(products[products.length - 1].id) : 0;
-        const newId = lastId + 1;
-        const newProduct = { id: newId, ...product };
-        products.push(newProduct);
-        await fs.writeFile(this.filePath, JSON.stringify(products, null, 2));
-        return newProduct;
+        try {
+            const products = await this.getAllProducts();
+            const lastId = products.length > 0 ? parseInt(products[products.length - 1].id) : 0;
+            const newProduct = { id: lastId + 1, ...product };
+            products.push(newProduct);
+            await fs.writeFile(this.filePath, JSON.stringify(products, null, 2));
+            return newProduct;
+        } catch (error) {
+            console.error("❌ Error agregando producto:", error);
+            throw error;
+        }
     }
 
     async updateProduct(id, updatedFields) {
-        let products = await this.getAllProducts();
-        const index = products.findIndex(prod => prod.id === parseInt(id));
-        if (index === -1) return null;
-        products[index] = { ...products[index], ...updatedFields };
-        await fs.writeFile(this.filePath, JSON.stringify(products, null, 2));
-        return products[index];
+        try {
+            const products = await this.getAllProducts();
+            const index = products.findIndex(p => p.id === parseInt(id));
+            if (index === -1) return null;
+            products[index] = { ...products[index], ...updatedFields };
+            await fs.writeFile(this.filePath, JSON.stringify(products, null, 2));
+            return products[index];
+        } catch (error) {
+            console.error("❌ Error actualizando producto:", error);
+            throw error;
+        }
     }
 
     async deleteProduct(id) {
-        let products = await this.getAllProducts();
-        const newProducts = products.filter(prod => prod.id !== parseInt(id));
-        if (products.length === newProducts.length) return false;
-        await fs.writeFile(this.filePath, JSON.stringify(newProducts, null, 2));
-        return true;
+        try {
+            const products = await this.getAllProducts();
+            const updated = products.filter(p => p.id !== parseInt(id));
+            if (updated.length === products.length) return false;
+            await fs.writeFile(this.filePath, JSON.stringify(updated, null, 2));
+            return true;
+        } catch (error) {
+            console.error("❌ Error eliminando producto:", error);
+            throw error;
+        }
     }
 }
 

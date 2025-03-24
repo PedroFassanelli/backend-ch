@@ -49,9 +49,9 @@
     "title": "Auriculares",
     "description": "Auriculares games",
     "code": "AUR555",
-    "price": 200,
+    "price": 210,
     "status": true,
-    "stock": 7,
+    "stock": 30,
     "category": "Perifericos",
     "thumbnails": [
       "img42.jpg"

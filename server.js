@@ -3,8 +3,10 @@ const { createServer } = require("http");
 const { Server } = require("socket.io");
 const { engine } = require("express-handlebars");
 const path = require("path");
+
 const productsRouter = require("./src/routes/products.routes");
 const cartsRouter = require("./src/routes/carts.routes");
+const viewsRouter = require("./src/routes/views.routes");
 const ProductManager = require("./src/managers/ProductManager");
 
 const app = express();
@@ -29,17 +31,7 @@ app.use(express.static(path.join(__dirname, "/src/public")));
 // Configurar routers en la app principal
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
-
-app.get("/", async (req, res) => {
-    const products = await productManager.getAllProducts();
-    res.render("home", { products });
-});
-
-// Vista de productos en tiempo real con WebSockets
-app.get("/realtimeproducts", async (req, res) => {
-    const products = await productManager.getAllProducts();
-    res.render("realTimeProducts", { products });
-});
+app.use("/", viewsRouter);
 
 // WebSockets
 io.on("connection", async (socket) => {
