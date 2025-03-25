@@ -1,0 +1,11 @@
+<h1>{{title}}</h1>
+<p><strong>Descripción:</strong> {{description}}</p>
+<p><strong>Precio:</strong> ${{price}}</p>
+<p><strong>Stock:</strong> {{stock}}</p>
+<p><strong>Categoría:</strong> {{category}}</p>
+
+<form action="/api/carts/{{cartId}}/product/{{_id}}" method="POST">
+  <button type="submit">Agregar al carrito</button>
+</form>
+
+<a href="/products">⬅ Volver</a>

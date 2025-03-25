@@ -56,5 +56,27 @@
     "thumbnails": [
       "img42.jpg"
     ]
+  },
+  {
+    "id": 6,
+    "title": "Monitor 27 Pulgadas",
+    "description": "Full HD",
+    "code": "MNTR27",
+    "price": 250,
+    "status": true,
+    "stock": 5,
+    "category": "Pantallas",
+    "thumbnails": []
+  },
+  {
+    "id": 7,
+    "title": "Notebook Lenovo",
+    "description": "Intel i5, 8GB RAM",
+    "code": "NBK123",
+    "price": 700,
+    "status": true,
+    "stock": 10,
+    "category": "Notebooks",
+    "thumbnails": []
   }
 ]

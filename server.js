@@ -3,11 +3,16 @@ const { createServer } = require("http");
 const { Server } = require("socket.io");
 const { engine } = require("express-handlebars");
 const path = require("path");
+const cookieParser = require("cookie-parser");
+const Cart = require("./src/models/cart.model"); 
 
 const productsRouter = require("./src/routes/products.routes");
 const cartsRouter = require("./src/routes/carts.routes");
 const viewsRouter = require("./src/routes/views.routes");
 const ProductManager = require("./src/managers/ProductManager");
+
+const connectDB = require("./src/config/db");
+connectDB();
 
 const app = express();
 const httpServer = createServer(app);
@@ -19,6 +24,23 @@ const productManager = new ProductManager("./src/data/products.json");
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+// Middleware para asignar carrito automáticamente
+app.use(async (req, res, next) => {
+    let cartId = req.cookies.cartId;
+  
+    if (!cartId) {
+      const newCart = await Cart.create({ products: [] });
+      cartId = newCart._id.toString();
+      res.cookie("cartId", cartId, { maxAge: 1000 * 60 * 60 * 24 * 7 }); // 7 días
+    }
+  
+    // Hacer el ID disponible para las vistas
+    res.locals.cartId = cartId;
+  
+    next();
+  });
 
 // Configuración de Handlebars
 app.engine("handlebars", engine());

@@ -1,8 +1,30 @@
-{{#> layout title="Lista de Productos"}}
-    <h1>Lista de Productos</h1>
-    <ul>
-        {{#each products}}
-            <li>{{this.id}} - {{this.title}} - ${{this.price}}</li>
-        {{/each}}
-    </ul>
-{{/layout}}
+<h1>🛒 Productos disponibles</h1>
+
+<ul>
+  {{#each products}}
+    <li>
+      <strong>{{title}}</strong> - ${{price}}  
+      <br>
+      Categoría: {{category}} | Stock: {{stock}}
+      <br>
+      <form action="/api/carts/{{../cartId}}/product/{{_id}}" method="POST">
+        <button type="submit">Agregar al carrito</button>
+      </form>
+      <!-- Opción de ver detalle -->
+      <a href="/products/{{_id}}">Ver detalle</a>
+    </li>
+    <hr>
+  {{/each}}
+</ul>
+
+<nav>
+  {{#if hasPrevPage}}
+    <a href="/products?page={{prevPage}}">⬅ Anterior</a>
+  {{/if}}
+
+  <span>Página {{page}} de {{totalPages}}</span>
+
+  {{#if hasNextPage}}
+    <a href="/products?page={{nextPage}}">Siguiente ➡</a>
+  {{/if}}
+</nav>
